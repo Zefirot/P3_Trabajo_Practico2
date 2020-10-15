@@ -1,9 +1,11 @@
-package codigoBusiness;
+package tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import codigoBusiness.Grafo;
 
 
 public class GrafoAristasTest {
@@ -54,5 +56,20 @@ public class GrafoAristasTest {
 		assertFalse(grafo.existeArista(2, 1));
 		
 	}
+	
+	@Test
+	public void pesoDeArista() {
+		grafo.agregarArista(0, 1, 5);
+		
+		assertEquals(5, grafo.getPeso(0, 1));
+	}
+	
+	@Test
+	public void pesoDeAristaInversa() {
+		grafo.agregarArista(0, 1, 5);
+
+		assertEquals(5, grafo.getPeso(1, 0));
+	}
+	
 
 }

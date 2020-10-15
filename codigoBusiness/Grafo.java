@@ -2,14 +2,13 @@ package codigoBusiness;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class Grafo {
 	
 	private ArrayList<Map<Integer,Integer>> vecinos;
-	
+	int cont =0;
 	public Grafo(int n) {
 	
 		this.vecinos = new ArrayList<Map<Integer,Integer>>();
@@ -25,8 +24,13 @@ public class Grafo {
 		verificarVertice(j);
 		verificarLoops(i,j);
 		
+		cont++;
 		vecinos.get(i).put(j, peso);
 		vecinos.get(j).put(i, peso);	
+	}
+	
+	public int getAristas() {
+		return cont;
 	}
 	
 	public void eliminarArista(int i, int j) {
@@ -54,6 +58,10 @@ public class Grafo {
 		verificarVertice(i);
 		
 		return vecinos.get(i).keySet();
+	}
+	
+	public int getPeso(double i, double j) {
+		return vecinos.get((int) i).get((int)j);
 	}
 	
 	
