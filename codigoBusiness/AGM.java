@@ -8,98 +8,117 @@ import java.util.Set;
 
 public class AGM {
 
+	private Set<Integer> vertices = new HashSet<Integer>();
 	
-	private Grafo grafo;
-	private Set<Integer> vertices= new HashSet<Integer>();
+	private ArrayList<Point> aristas = new ArrayList<Point>();
 	
-	public Grafo getAGM(Grafo graf) {
+	private Grafo nuevoGrafo;
+	
+	
+	public Grafo getAGM(Grafo grafo) {
 		
-		this.grafo = new Grafo(graf.cantidadVertices());
 		vertices.add(0);
+		nuevoGrafo = new Grafo(grafo.cantidadVertices());
 		
-		int i = 0;
+		int i=1;
 		
-		while(i<=graf.cantidadVertices()-1) {
+		while( i<=grafo.cantidadVertices()-1 ) {
 			
-			Point aristaNueva = agregarAristaMenor(graf);
-			//System.out.println(aristaNueva);
-			int pesoArista = graf.getPeso(aristaNueva.getX(), aristaNueva.getY());
-			grafo.agregarArista((int)aristaNueva.getX(), (int)aristaNueva.getY(), pesoArista);
+			Point arista = buscarArista(grafo);
+			System.out.println(arista);
+
+			nuevoGrafo.agregarArista((int)arista.getX(),(int) arista.getY(), grafo.getPeso((int)arista.getX(), (int)arista.getY()));
 			
-			vertices.add((int)aristaNueva.getX());
+			vertices.add((int)arista.getY());
 			
 			i++;
 		}
 		
-		return grafo;
+		
+		return nuevoGrafo;
 		
 	}
 	
-	
-	public Point agregarAristaMenor(Grafo graf) {
+	public Point buscarArista(Grafo grafo) {
+		ArrayList<Point> aristasMenores = new ArrayList<Point>();
 		
-		ArrayList<Point> conjuntoAristasMenores = new ArrayList<Point>();
-		int aristaActual=0;
+		Iterator<Integer> vertice = vertices.iterator();
+		int verticeActual=0;
 		
-		Iterator<Integer> it = vertices.iterator();
-	
-		while(it.hasNext()) {
+		while(vertice.hasNext()) {
+			verticeActual = vertice.next();
 			
-			conjuntoAristasMenores.add(new Point(aristaActual,getVecinoConMenorPeso(graf,aristaActual)));
-			System.out.println(aristaActual);
-			aristaActual = it.next();
+			Set<Integer> vecinos = grafo.vecinos(verticeActual);
+			
+			Point aristaEncontrada=aristaMenor(verticeActual, vecinos, grafo);
+			
+			if(aristaEncontrada!=null) {
+				aristasMenores.add(aristaEncontrada);
+			}
+			
+			
 			
 		}
 		
-		return getAristaMenorPeso(conjuntoAristasMenores,graf);
+
+		
+		return aristaMenorPosible(aristasMenores, grafo);
 		
 	}
 	
-	public Point getAristaMenorPeso(ArrayList<Point> conjunto, Grafo graf) {
-		Point actual = conjunto.get(0);
+	public Point aristaMenorPosible(ArrayList<Point> aristas, Grafo grafo) {
 		
-		int menor = graf.getPeso(actual.getX(), actual.getY());
+		Point aristaActual = aristas.get(0);
 		
-		for(Point punto : conjunto) {
-			//System.out.println(punto);
-			int pesoActual = graf.getPeso(punto.getX(), punto.getY());
+		
+		int pesoMenor = grafo.getPeso((int) aristaActual.getX(),(int) aristaActual.getY());
+		
+		
+		for(Point arista : aristas) {
 			
-			if(menor>pesoActual) {
-				actual = punto;
-				menor = pesoActual;
+			if(pesoMenor>grafo.getPeso((int)arista.getX(),(int) arista.getY())) {
+				
+				aristaActual = arista;
+				pesoMenor = grafo.getPeso((int) arista.getX(),(int) arista.getY());
+				
+			}
+		}
+		return aristaActual;
+		
+	}
+	
+	
+	
+	
+	//Toma un vertice y busca el vecino con menor peso
+	public Point aristaMenor(int i,Set<Integer> vecinos, Grafo grafo) {
+		Point arista = null;
+		
+		Iterator<Integer> vecino = vecinos.iterator(); 
+		
+		int pesoMenor = Integer.MAX_VALUE;
+		
+		
+		while(vecino.hasNext()) {
+			
+			int verticeActual=vecino.next();
+			
+			int pesoActual = grafo.getPeso(i,verticeActual);
+			
+			if(i!=verticeActual  &&
+					!aristas.contains(new Point(i,verticeActual)) &&
+					pesoMenor>pesoActual) {
+				aristas.add(new Point(i,verticeActual));
+				aristas.add(new Point(verticeActual,i));
+				pesoMenor=pesoActual;
+				arista = new Point(i,verticeActual);
 			}
 			
 		}
 		
-		return actual;
-		
-		
-	}
-	
-	//Esto te va a dar la arista menor que no este marcada anteriormente.
-	public int getVecinoConMenorPeso(Grafo graf,int i) {
-		
-		Set<Integer> aristas = graf.vecinos(i);
-		
-		Iterator<Integer> it = aristas.iterator();
-		
-		int arista = it.next();
-		
-		int pesoMinimo = graf.getPeso(i, arista); //Se toma la primer arista
-		
-		while(it.hasNext()) {
-			int aristaActual = it.next();
-			int pesoAristaActual = graf.getPeso(i, aristaActual);
-			
-			if(vertices.contains(aristaActual)==false&&pesoMinimo>pesoAristaActual) {
-				arista = aristaActual;
-				pesoMinimo = pesoAristaActual;
-			}
-			
-		}
 		return arista;
-		
 	}
+	
 
 	
 	

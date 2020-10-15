@@ -60,8 +60,8 @@ public class Grafo {
 		return vecinos.get(i).keySet();
 	}
 	
-	public int getPeso(double i, double j) {
-		return vecinos.get((int) i).get((int)j);
+	public int getPeso(int i, int j) {
+		return vecinos.get(i).get(j);
 	}
 	
 	
