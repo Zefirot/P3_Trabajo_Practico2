@@ -8,38 +8,39 @@ import java.util.Set;
 
 public class AGM {
 
-	private Set<Integer> vertices = new HashSet<Integer>();
+	private static Set<Integer> vertices = new HashSet<Integer>(); //Conjunto de donde "marco" los vertices
 	
-	private ArrayList<Point> aristas = new ArrayList<Point>();
+	private static ArrayList<Point> aristas = new ArrayList<Point>(); //Conjunto en donde "marco" las aristas
 	
-	private Grafo nuevoGrafo;
+	private static Grafo nuevoGrafo;  //Grafo a devolver
 	
 	
-	public Grafo getAGM(Grafo grafo) {
+	public static Grafo getAGM(Grafo grafo) {
 		
-		vertices.add(0);
+		vertices.add(0); //Agarro el primer vertice para empezar
+		
 		nuevoGrafo = new Grafo(grafo.cantidadVertices());
 		
 		int i=1;
 		
 		while( i<=grafo.cantidadVertices()-1 ) {
 			
-			Point arista = buscarArista(grafo);
-			System.out.println(arista);
-
+			Point arista = buscarArista(grafo); //Busco la arista con menor peso de mi grafo actual
+			
 			nuevoGrafo.agregarArista((int)arista.getX(),(int) arista.getY(), grafo.getPeso((int)arista.getX(), (int)arista.getY()));
 			
-			vertices.add((int)arista.getY());
+			vertices.add((int)arista.getY()); //Agrego el vertice que conecta las aristas.
 			
 			i++;
 		}
-		
 		
 		return nuevoGrafo;
 		
 	}
 	
-	public Point buscarArista(Grafo grafo) {
+	
+	// Se busca la arista con menor peso posible, dentro de los vecinos de los vertices que se van agregando
+	private static Point buscarArista(Grafo grafo) {
 		ArrayList<Point> aristasMenores = new ArrayList<Point>();
 		
 		Iterator<Integer> vertice = vertices.iterator();
@@ -52,24 +53,56 @@ public class AGM {
 			
 			Point aristaEncontrada=aristaMenor(verticeActual, vecinos, grafo);
 			
-			if(aristaEncontrada!=null) {
+			if(aristaEncontrada!=null) { //si la aristaEncontrada es null significa que no existen mas aristas para el vertice pasado.
 				aristasMenores.add(aristaEncontrada);
 			}
 			
+		}
+
+		return aristaMenorPosible(aristasMenores, grafo); //Le pido que devuelva la menor arista de todas las posibles
+		
+	}
+
+		
+	//Toma un vertice y busca el vecino con menor peso
+	private static Point aristaMenor(int i,Set<Integer> vecinos, Grafo grafo) {
+		Point arista = null;
+		
+		Iterator<Integer> vecino = vecinos.iterator(); 
+		
+		int pesoMenor = Integer.MAX_VALUE;
+		
+		
+		while(vecino.hasNext()) {
 			
+			int verticeActual=vecino.next();
+			
+			int pesoActual = grafo.getPeso(i,verticeActual);
+			
+			Point posibleArista = new Point(i,verticeActual);
+	
+			/*Las condicines son que la arista no pueda ser (0,0) por ejemplo y que la arista que se encontro no esta agrega
+			 * anteriormente, con eso ultimo se consigue que no haya bucles.
+			*/
+			if(i!=verticeActual  &&
+					!aristas.contains(posibleArista) &&
+						pesoMenor>pesoActual) {
+				
+				aristas.add(posibleArista);
+				aristas.add(posibleArista);
+				pesoMenor=pesoActual;
+				arista = new Point(i,verticeActual);
+			}
 			
 		}
 		
-
-		
-		return aristaMenorPosible(aristasMenores, grafo);
-		
+		return arista;
 	}
 	
-	public Point aristaMenorPosible(ArrayList<Point> aristas, Grafo grafo) {
+	//Recorre la lista de aristas y calcula cual arista es la de menos peso
+	private static Point aristaMenorPosible(ArrayList<Point> aristas, Grafo grafo) {
 		
 		Point aristaActual = aristas.get(0);
-		
 		
 		int pesoMenor = grafo.getPeso((int) aristaActual.getX(),(int) aristaActual.getY());
 		
@@ -87,68 +120,5 @@ public class AGM {
 		
 	}
 	
-	
-	
-	
-	//Toma un vertice y busca el vecino con menor peso
-	public Point aristaMenor(int i,Set<Integer> vecinos, Grafo grafo) {
-		Point arista = null;
 		
-		Iterator<Integer> vecino = vecinos.iterator(); 
-		
-		int pesoMenor = Integer.MAX_VALUE;
-		
-		
-		while(vecino.hasNext()) {
-			
-			int verticeActual=vecino.next();
-			
-			int pesoActual = grafo.getPeso(i,verticeActual);
-			
-			if(i!=verticeActual  &&
-					!aristas.contains(new Point(i,verticeActual)) &&
-					pesoMenor>pesoActual) {
-				aristas.add(new Point(i,verticeActual));
-				aristas.add(new Point(verticeActual,i));
-				pesoMenor=pesoActual;
-				arista = new Point(i,verticeActual);
-			}
-			
-		}
-		
-		return arista;
-	}
-	
-
-	
-	
-	public static void main(String[] args) {
-		
-		Grafo viejo = new Grafo(9);
-		viejo.agregarArista(0, 1, 4); //AB
-		viejo.agregarArista(0, 2, 8); //AH
-		viejo.agregarArista(1, 2, 12); //BH
-		viejo.agregarArista(1, 3, 8); //BC
-		viejo.agregarArista(2, 5, 1);  //HG
-		viejo.agregarArista(2, 4, 6); //HI
-		viejo.agregarArista(3, 4, 3); //CI
-		viejo.agregarArista(3, 6, 6); //CD
-		viejo.agregarArista(3, 7, 4); //CF
-		viejo.agregarArista(4, 5, 5); //IG
-		viejo.agregarArista(5, 7, 3); //GF
-		viejo.agregarArista(6, 8, 9); //DE
-		viejo.agregarArista(6, 7, 13); //DF
-		viejo.agregarArista(7, 8, 10); //FE
-		
-		AGM it = new AGM();
-		
-		Grafo nuevo = it.getAGM(viejo);
-		
-		System.out.println(viejo.getAristas());
-		System.out.println(nuevo.getAristas());
-
-	}
-	
-	
-	
 }

@@ -8,10 +8,13 @@ import java.util.Set;
 public class Grafo {
 	
 	private ArrayList<Map<Integer,Integer>> vecinos;
-	int cont =0;
+	private int peso;
+	
 	public Grafo(int n) {
 	
 		this.vecinos = new ArrayList<Map<Integer,Integer>>();
+		
+		this.peso = 0;
 		
 		for(int i=0; i<n; i++) {
 			vecinos.add(new HashMap<Integer,Integer>());
@@ -24,13 +27,9 @@ public class Grafo {
 		verificarVertice(j);
 		verificarLoops(i,j);
 		
-		cont++;
+		this.peso+=peso;
 		vecinos.get(i).put(j, peso);
 		vecinos.get(j).put(i, peso);	
-	}
-	
-	public int getAristas() {
-		return cont;
 	}
 	
 	public void eliminarArista(int i, int j) {
@@ -38,6 +37,7 @@ public class Grafo {
 		verificarVertice(j);
 		verificarLoops(i,j);
 		
+		peso-=getPeso(i,j);
 		vecinos.get(i).remove(j);
 		vecinos.get(j).remove(i);
 	}
@@ -63,6 +63,11 @@ public class Grafo {
 	public int getPeso(int i, int j) {
 		return vecinos.get(i).get(j);
 	}
+	
+	public int getPesoAristas() {
+		return peso;
+	}
+	
 	
 	
 	private void verificarVertice(int i) {
