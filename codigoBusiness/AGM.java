@@ -33,7 +33,7 @@ public class AGM {
 			
 			aristas.add(new Point((int)arista.getX(),(int)arista.getY()));
 			aristas.add(new Point((int)arista.getY(),(int)arista.getX()));
-					
+			
 			i++;
 		}
 		

@@ -15,12 +15,13 @@ public class AGMTest {
 
 	@Before
 	public void crear() {
-		grafo = new Grafo(9);	
 		agm = new AGM();
 	}
 	
 	@Test
 	public void agmPesoCorrectoEjemplo1() {
+		grafo = new Grafo(9);
+		
 		//Se unen todas las aristas.
 		grafo.agregarArista(0, 1, 4); //AB  
 		grafo.agregarArista(0, 2, 8); //AH
@@ -45,6 +46,7 @@ public class AGMTest {
 	
 	@Test
 	public void agmPesoCorrectoEjemplo2() {
+		grafo = new Grafo(9);
 		
 		grafo.agregarArista(0, 1, 4); //AB  
 		grafo.agregarArista(0, 2, 8); //AH
@@ -65,5 +67,49 @@ public class AGMTest {
 		assertEquals(37,nuevoGrafo.getPesoAristas());
 		
 	}
+	
+	
+	@Test
+	public void agmPesoCorrectoEjemplo3() {
+		grafo = new Grafo(7);
+		
+		grafo.agregarArista(0, 1, 5); //AB  
+		grafo.agregarArista(0, 2, 8); //AH
+		grafo.agregarArista(0, 3, 9);
+		grafo.agregarArista(1, 4, 6);
+		grafo.agregarArista(1, 2, 3);
+		grafo.agregarArista(2, 3, 4);
+		grafo.agregarArista(2, 5, 2);
+		grafo.agregarArista(3, 6, 7);
+		grafo.agregarArista(4, 5, 10);
+		grafo.agregarArista(5, 6, 2);
+		
+		Grafo nuevoGrafo = agm.getAGM(grafo);
+		assertEquals(22,nuevoGrafo.getPesoAristas());
+	}
+	
+	@Test
+	public void agmPesoCorrectoNodoUniversal() {
+		grafo = new Grafo(6);
+		
+		grafo.agregarArista(0, 1, 3);
+		grafo.agregarArista(0, 2, 5);
+		grafo.agregarArista(0, 3, 7);
+		grafo.agregarArista(0, 4, 1);
+		grafo.agregarArista(0, 5, 8);
+		grafo.agregarArista(1, 2, 15);
+		grafo.agregarArista(2, 3, 5);
+		grafo.agregarArista(3, 4, 2);
+		grafo.agregarArista(4, 5, 10);
+		grafo.agregarArista(5, 1, 4);
+		
+		Grafo nuevoGrafo = agm.getAGM(grafo);
+		
+		assertEquals(15,nuevoGrafo.getPesoAristas());
+	}
+	
+	
+	
+	
 
 }
