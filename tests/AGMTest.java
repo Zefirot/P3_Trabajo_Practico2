@@ -18,6 +18,13 @@ public class AGMTest {
 		agm = new AGM();
 	}
 	
+	@Test(expected = RuntimeException.class)
+	public void grafoDisconexo() {
+		grafo = new Grafo(5);
+		
+		Grafo nuevoGrafo = agm.getAGM(grafo);
+	}
+	
 	@Test
 	public void agmPesoCorrectoEjemplo1() {
 		grafo = new Grafo(9);
@@ -73,8 +80,8 @@ public class AGMTest {
 	public void agmPesoCorrectoEjemplo3() {
 		grafo = new Grafo(7);
 		
-		grafo.agregarArista(0, 1, 5); //AB  
-		grafo.agregarArista(0, 2, 8); //AH
+		grafo.agregarArista(0, 1, 5);  
+		grafo.agregarArista(0, 2, 8); 
 		grafo.agregarArista(0, 3, 9);
 		grafo.agregarArista(1, 4, 6);
 		grafo.agregarArista(1, 2, 3);

@@ -17,6 +17,8 @@ public class AGM {
 	
 	public Grafo getAGM(Grafo grafo) {
 		
+		esConexo(grafo); //Verifico que el grafo pasado es conexo
+		
 		vertices.add(0); //Agarro el primer vertice para empezar
 		
 		nuevoGrafo = new Grafo(grafo.cantidadVertices()); 
@@ -39,6 +41,13 @@ public class AGM {
 		
 		return nuevoGrafo;
 		
+	}
+	
+	
+	public void esConexo(Grafo grafo) {
+		if( !BFS.esConexo(grafo) ) {
+			throw new RuntimeException("El grafo ingresado no es conexo, por ende no se puede crear un AGM");
+		}
 	}
 	
 	
