@@ -2,6 +2,9 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -70,6 +73,54 @@ public class GrafoAristasTest {
 
 		assertEquals(5, grafo.getPeso(1, 0));
 	}
+	
+	@Test 
+	public void agregarConjuntoAristas() {
+		
+		Grafo grafo = new Grafo(5);
+		grafo.agregarArista(0, 1, 0);
+		grafo.agregarArista(0, 2, 0);
+		grafo.agregarArista(0, 3, 0);
+		grafo.agregarArista(0, 4, 0);
+		grafo.agregarArista(1, 2, 0);
+		grafo.agregarArista(4, 3, 0);
+		
+		Point[] aristas = {new Point(0,1),new Point(0,2),new Point(0,3), new Point(0,4), new Point(1,2), new Point(4,3)};
+		
+		comprobarAristas(aristas,grafo.getAristas());
+		
+	}
+	
+	@Test
+	public void quitarConjuntoAristas() {
+		
+		Grafo grafo = new Grafo(5);
+		grafo.agregarArista(0, 1, 0);
+		grafo.agregarArista(0, 2, 0);
+		grafo.agregarArista(0, 3, 0);
+		grafo.agregarArista(0, 4, 0);
+		grafo.agregarArista(1, 2, 0);
+		grafo.agregarArista(4, 3, 0);
+		
+		grafo.eliminarArista(0, 2);
+		grafo.eliminarArista(1, 2);
+		
+		Point[] aristas = {new Point(0,1),new Point(0,3), new Point(0,4), new Point(4,3)};
+		
+		comprobarAristas(aristas,grafo.getAristas());
+	}
+	
+	public void comprobarAristas(Point[] aristas, Set<Point> aristasGrafo) {
+		assertEquals(aristas.length, aristasGrafo.size());
+		
+		for(Point arista : aristas) {
+			
+			assertTrue(aristasGrafo.contains(arista));
+		
+		}
+		
+	}
+	
 	
 
 }

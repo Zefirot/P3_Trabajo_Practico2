@@ -1,18 +1,22 @@
 package codigoBusiness;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class Grafo {
 	
 	private ArrayList<Map<Integer,Integer>> vecinos;
+	private Set<Point> aristas;
 	private int peso;
 	
 	public Grafo(int n) {
 	
 		this.vecinos = new ArrayList<Map<Integer,Integer>>();
+		this.aristas = new HashSet<Point>();
 		
 		this.peso = 0;
 		
@@ -27,6 +31,7 @@ public class Grafo {
 		verificarVertice(j);
 		verificarLoops(i,j);
 		
+		aristas.add(new Point(i,j));
 		this.peso+=peso;
 		vecinos.get(i).put(j, peso);
 		vecinos.get(j).put(i, peso);	
@@ -37,6 +42,7 @@ public class Grafo {
 		verificarVertice(j);
 		verificarLoops(i,j);
 		
+		aristas.remove(new Point(i,j));
 		peso-=getPeso(i,j);
 		vecinos.get(i).remove(j);
 		vecinos.get(j).remove(i);
@@ -68,7 +74,9 @@ public class Grafo {
 		return peso;
 	}
 	
-	
+	public Set<Point> getAristas(){
+		return aristas;
+	}
 	
 	private void verificarVertice(int i) {
 		if(i<0) 
