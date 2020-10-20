@@ -29,7 +29,6 @@ public class JPanelTomarDatos extends JPanel {
 	private JScrollPane scrollPane;
 	private DefaultTableModel model;
 	private ArrayList<Persona> datos;
-	private JSpinner spinner;
 
 	/**
 	 * Create the panel.
@@ -84,6 +83,22 @@ public class JPanelTomarDatos extends JPanel {
 		btnAgregar.setBounds(424, 43, 89, 23);
 		add(btnAgregar);
 		
+		JButton btnProcesar = new JButton("Procesar!");
+		btnProcesar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(datos.size()==0) {
+					JOptionPane.showMessageDialog(null, "No se pueden procesar los datos, porque no se encuentran datos ingresados");
+				}
+				UIMain.cambiarADatosProcesados();
+				
+			}
+		});
+		btnProcesar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnProcesar.setBounds(228, 259, 120, 36);
+		add(btnProcesar);
+		
 		//Creo la JTable
 		model = new DefaultTableModel();
 		model.addColumn("Nombre");
@@ -102,6 +117,8 @@ public class JPanelTomarDatos extends JPanel {
 		scrollPane.setViewportView(table);
 		table.setEnabled(false);
 		table.setModel(model);
+		
+		
 		
 		
 	}
@@ -138,5 +155,9 @@ public class JPanelTomarDatos extends JPanel {
 		model.addRow(new String[]{ nombre, String.valueOf(deporte), String.valueOf(musica),
 				String.valueOf(espectaculo), String.valueOf(ciencia) });
 		table.setModel(model);
+	}
+	
+	public ArrayList<Persona> getDatos(){
+		return datos;
 	}
 }

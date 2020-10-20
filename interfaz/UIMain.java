@@ -12,7 +12,8 @@ public class UIMain {
 	private JFrame frame;
 	private final JLayeredPane layeredPane = new JLayeredPane();
 	
-	private JPanelTomarDatos panelDatos;
+	private static JPanelTomarDatos panelDatos;
+	private static JPanelDatosProcesados panelDatosProcesados;
 	/**
 	 * Launch the application.
 	 */
@@ -55,11 +56,22 @@ public class UIMain {
 		
 		
 		panelDatos = new JPanelTomarDatos();
-		//panelDatos.setBounds(0, 0, 581, 316);
+		panelDatosProcesados = new JPanelDatosProcesados();
+		panelDatosProcesados.setVisible(false);
 		layeredPane.add(panelDatos);
-		
-		
+		layeredPane.add(panelDatosProcesados);
 		
 		
 	}
+	
+	
+	public static void cambiarADatosProcesados() {
+		
+		panelDatosProcesados.procesarDatos(panelDatos.getDatos());
+		
+		panelDatos.setVisible(false);
+		panelDatosProcesados.setVisible(true);
+		
+	}
+	
 }

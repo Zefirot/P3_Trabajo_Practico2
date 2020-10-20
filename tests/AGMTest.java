@@ -112,6 +112,15 @@ public class AGMTest {
 		assertEquals(15,nuevoGrafo.getPesoAristas());
 	}
 	
+	@Test
+	public void agmPesoUnicoNodo() {
+		grafo = new Grafo(1);
+		
+		Grafo nuevoGrafo = agm.getAGM(grafo);
+		
+		assertEquals(0,nuevoGrafo.getPesoAristas());
+	}
+	
 	
 	
 	

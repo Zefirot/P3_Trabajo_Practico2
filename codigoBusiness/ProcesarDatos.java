@@ -41,8 +41,6 @@ public class ProcesarDatos {
 		}
 	}
 	
-	
-	
 	private int calcularSimilaridad(Persona persona1, Persona persona2) {
 		
 		int deporte = Math.abs(persona1.getDeporte()-persona2.getDeporte());
@@ -58,6 +56,10 @@ public class ProcesarDatos {
 		
 		Set<Point> aristas = grafo.getAristas();
 		
+		if(aristas.size()==0) { //Cuando el grafo no tiene aristas, no existe arista alguna para quitar.
+			return;
+		}
+	
 		Point aristaMayor = buscarAristaMayor(aristas);
 		
 		grafo.eliminarArista((int)aristaMayor.getX(), (int)aristaMayor.getY());
@@ -67,6 +69,7 @@ public class ProcesarDatos {
 	}
 	
 	private Point buscarAristaMayor(Set<Point> aristas) {
+		
 		Point aristaMenor = null;
 		
 		int peso = Integer.MIN_VALUE;
@@ -75,7 +78,7 @@ public class ProcesarDatos {
 			
 			int pesoActual=grafo.getPeso((int)arista.getX(), (int)arista.getY());
 			
-			if( peso>pesoActual ) {
+			if( peso<pesoActual ) { 
 				peso = pesoActual;
 				aristaMenor = arista;
 			}
@@ -89,8 +92,13 @@ public class ProcesarDatos {
 	public Set<Integer> getGrupo1(){
 		return BFS.alcanzables(grafo, indiceGrupo1);
 	}
-	public Set<Integer> getGrupo2(){
-		return BFS.alcanzables(grafo, indiceGrupo2);
+	public Set<Integer> getGrupo2(){ //Si no existe el grupo2 entonces retorno null
+		
+		if(indiceGrupo2!=indiceGrupo1) { //Compara los indice para no devolver el mismo grupo.
+			return BFS.alcanzables(grafo, indiceGrupo2);
+		}
+		return null;
+		
 	}
 	
 	
