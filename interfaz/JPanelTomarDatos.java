@@ -7,6 +7,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 import codigoBusiness.Persona;
+import codigoBusiness.PersonasJSON;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JSpinner;
+import javax.swing.SwingConstants;
 
 public class JPanelTomarDatos extends JPanel {
 	private JTextField textNombre;
@@ -119,9 +121,44 @@ public class JPanelTomarDatos extends JPanel {
 		table.setModel(model);
 		
 		
+		//CAMBIAR FUNCIONALIDAD DE BOTON
+		//EL BOTON TIENE QUE LLEVAR A ALGUN LADO PARA ELEGIR CUANTAS PERSONAS CARGAR
+		JButton btnNewButton = new JButton("Cargar Datos Default");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cargarDatosDefault();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnNewButton.setBounds(10, 259, 151, 46);
+		add(btnNewButton);
+		
+		
 		
 		
 	}
+	
+	private void cargarDatosDefault() {
+		PersonasJSON personas = new PersonasJSON();
+		personas = personas.leerJSON("src/datosJSON/Personas.JSON");
+		
+		for(int i=0 ; i<personas.getCantidadPersonas(); i++) {
+			
+			String nombre = personas.getPersona(i).getNombre();
+			int deporte = personas.getPersona(i).getDeporte();
+			int musica = personas.getPersona(i).getMusica();
+			int espectaculo = personas.getPersona(i).getEspectaculo();
+			int ciencia = personas.getPersona(i).getCiencia();
+			
+			model.addRow(new String[]{ nombre, String.valueOf(deporte), String.valueOf(musica),
+					String.valueOf(espectaculo), String.valueOf(ciencia) });
+		}
+		
+		datos.addAll(personas.getTodasLasPersonas());
+		
+	}
+	
 	
 	private boolean controlarDatos() {
 		
