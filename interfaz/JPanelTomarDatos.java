@@ -92,8 +92,9 @@ public class JPanelTomarDatos extends JPanel {
 				
 				if(datos.size()==0) {
 					JOptionPane.showMessageDialog(null, "No se pueden procesar los datos, porque no se encuentran datos ingresados");
+				}else {
+					UIMain.cambiarADatosProcesados();
 				}
-				UIMain.cambiarADatosProcesados();
 				
 			}
 		});

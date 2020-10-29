@@ -14,6 +14,7 @@ public class UIMain {
 	
 	private static JPanelTomarDatos panelDatos;
 	private static JPanelDatosProcesados panelDatosProcesados;
+	private static JPanelEstadisticas panelEstadisticas;
 	/**
 	 * Launch the application.
 	 */
@@ -56,10 +57,16 @@ public class UIMain {
 		
 		
 		panelDatos = new JPanelTomarDatos();
+		
 		panelDatosProcesados = new JPanelDatosProcesados();
 		panelDatosProcesados.setVisible(false);
+		
+		panelEstadisticas = new JPanelEstadisticas();
+		panelEstadisticas.setVisible(false);
+		
 		layeredPane.add(panelDatos);
 		layeredPane.add(panelDatosProcesados);
+		layeredPane.add(panelEstadisticas);
 		
 		
 	}
@@ -71,6 +78,17 @@ public class UIMain {
 		
 		panelDatos.setVisible(false);
 		panelDatosProcesados.setVisible(true);
+		
+	}
+	
+	public static void cambiarAEstadisticas() {
+		
+		panelDatosProcesados.setVisible(false);
+		
+		panelEstadisticas.setPromediosGrupo1(panelDatosProcesados.getPromediosGrupo1());
+		panelEstadisticas.setPromediosGrupo2(panelDatosProcesados.getPromediosGrupo2());
+	
+		panelEstadisticas.setVisible(true);
 		
 	}
 	

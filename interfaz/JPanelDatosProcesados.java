@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JPanelDatosProcesados extends JPanel {
 	private JTable tableGrupo1;
@@ -23,7 +26,10 @@ public class JPanelDatosProcesados extends JPanel {
 	private JScrollPane scrollPaneTable1;
 	private JScrollPane scrollPaneTable2;
 	
-	private ArrayList<Persona> datos;
+	private ArrayList<Persona> todasLasPersonas;
+	
+	private ArrayList<Integer> promediosGrupo1;
+	private ArrayList<Integer> promediosGrupo2;
 	
 	/**
 	 * Create the panel.
@@ -74,17 +80,36 @@ public class JPanelDatosProcesados extends JPanel {
 		scrollPaneTable2.setViewportView(tableGrupo2);
 		
 		
-		
+		//Botones
+		JButton btnVerEstadisticas = new JButton("Ver Estadisticas");
+		btnVerEstadisticas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				UIMain.cambiarAEstadisticas();
+				
+			}
+		});
+		btnVerEstadisticas.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnVerEstadisticas.setBounds(75, 282, 123, 23);
+		add(btnVerEstadisticas);
+			
 		
 	}
 	
-	public void procesarDatos(ArrayList<Persona> datos) {
-		this.datos=datos;
+	public void procesarDatos(ArrayList<Persona> personas) {
+		this.todasLasPersonas=personas;
 		
-		ProcesarDatos datosProcesados = new ProcesarDatos(datos);
+		ProcesarDatos datosProcesados = new ProcesarDatos(todasLasPersonas);
 		
-		actualizarTable1(datosProcesados.getGrupo1());
-		actualizarTable2(datosProcesados.getGrupo2());
+		Set<Integer> grupo1 = datosProcesados.getGrupo1();
+		Set<Integer> grupo2 = datosProcesados.getGrupo2();
+		
+		actualizarTable1(grupo1);
+		actualizarTable2(grupo2);
+		
+		promediosGrupo1 = ProcesarDatos.getPromedio(grupo1, todasLasPersonas);
+		promediosGrupo2 = ProcesarDatos.getPromedio(grupo2, todasLasPersonas);
 		
 	}
 	
@@ -93,7 +118,7 @@ public class JPanelDatosProcesados extends JPanel {
 		
 		for(Integer persona : grupo1) {
 			
-			Persona personaActual=datos.get(persona);
+			Persona personaActual=todasLasPersonas.get(persona);
 			
 			String nombre = personaActual.getNombre();
 			String deporte = String.valueOf(personaActual.getDeporte());
@@ -116,7 +141,7 @@ public class JPanelDatosProcesados extends JPanel {
 		
 		for(Integer persona : grupo2) {
 
-			Persona personaActual=datos.get(persona);
+			Persona personaActual=todasLasPersonas.get(persona);
 
 			String nombre = personaActual.getNombre();
 			String deporte = String.valueOf(personaActual.getDeporte());
@@ -131,5 +156,14 @@ public class JPanelDatosProcesados extends JPanel {
 
 
 	}
-	 
+	
+	public ArrayList<Integer> getPromediosGrupo1(){
+		return promediosGrupo1;
+	}
+	
+	public ArrayList<Integer> getPromediosGrupo2(){
+		return promediosGrupo2;
+	}
+	
+	
 }

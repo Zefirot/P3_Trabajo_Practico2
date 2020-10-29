@@ -101,5 +101,40 @@ public class ProcesarDatos {
 		
 	}
 	
+	public static ArrayList<Integer> getPromedio(Set<Integer> subGrupo, ArrayList<Persona> grupoCompleto) {
+		
+		if(subGrupo==null)
+			return null;
+		
+		ArrayList<Integer> promedios = new ArrayList<Integer>();
+		
+		int promedioDeporte = 0;
+		int promedioMusica = 0;
+		int promedioEspectaculo = 0;
+		int promedioCiencia = 0;
+		
+		for(Integer persona : subGrupo) {
+			
+			promedioDeporte += grupoCompleto.get(persona).getDeporte();
+			
+			promedioMusica += grupoCompleto.get(persona).getMusica();
+			
+			promedioEspectaculo += grupoCompleto.get(persona).getEspectaculo();
+			
+			promedioCiencia += grupoCompleto.get(persona).getCiencia();
+			
+		}
+		
+		promedios.add(promedioDeporte/subGrupo.size());
+		promedios.add(promedioMusica/subGrupo.size());
+		promedios.add(promedioEspectaculo/subGrupo.size());
+		promedios.add(promedioCiencia/subGrupo.size());
+		
+		
+		return promedios;
+	}
+	
+	
+	
 	
 }
