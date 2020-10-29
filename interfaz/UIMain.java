@@ -85,9 +85,7 @@ public class UIMain {
 		
 		panelDatosProcesados.setVisible(false);
 		
-		panelEstadisticas.setPromediosGrupo1(panelDatosProcesados.getPromediosGrupo1());
-		panelEstadisticas.setPromediosGrupo2(panelDatosProcesados.getPromediosGrupo2());
-	
+		panelEstadisticas.setPromediosDeGrupos(panelDatosProcesados.getPromediosGrupo1(), panelDatosProcesados.getPromediosGrupo2());
 		panelEstadisticas.setVisible(true);
 		
 	}
