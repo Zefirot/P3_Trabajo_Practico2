@@ -90,4 +90,11 @@ public class UIMain {
 		
 	}
 	
+	public static void volverADatosProcesados() {
+		
+		panelEstadisticas.setVisible(false);
+		panelDatosProcesados.setVisible(true);
+		
+	}
+	
 }

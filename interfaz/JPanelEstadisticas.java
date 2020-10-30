@@ -10,6 +10,9 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class JPanelEstadisticas extends JPanel {
 
@@ -36,7 +39,7 @@ public class JPanelEstadisticas extends JPanel {
 		
 		JPanel panelGrupo1 = new JPanel();
 		panelGrupo1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Promedios Grupo 1", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelGrupo1.setBounds(32, 11, 257, 223);
+		panelGrupo1.setBounds(24, 11, 257, 223);
 		add(panelGrupo1);
 		panelGrupo1.setLayout(null);
 		
@@ -103,7 +106,7 @@ public class JPanelEstadisticas extends JPanel {
 		JPanel panelGrupo2 = new JPanel();
 		panelGrupo2.setLayout(null);
 		panelGrupo2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Promedios Grupo 2", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panelGrupo2.setBounds(314, 11, 257, 223);
+		panelGrupo2.setBounds(299, 11, 257, 223);
 		add(panelGrupo2);
 		
 		//Labels
@@ -166,6 +169,20 @@ public class JPanelEstadisticas extends JPanel {
 		
 		
 		
+		JButton btnVolver = new JButton("Volver ");
+		btnVolver.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				UIMain.volverADatosProcesados();
+				
+			}
+		});
+		btnVolver.setBounds(246, 263, 89, 23);
+		add(btnVolver);
+		
+		
+		
 	}
 	
 	
@@ -224,5 +241,4 @@ public class JPanelEstadisticas extends JPanel {
 		progressBarCienciaG2.setString("Promedio: "+String.valueOf(promedioCiencia));
 		
 	}
-	
 }
