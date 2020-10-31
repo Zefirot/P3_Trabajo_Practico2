@@ -40,38 +40,60 @@ public class JPanelTomarDatos extends JPanel {
 		setLayout(null);
 		setBounds(0, 0, 581, 316);
 		
+		//Labels
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNombre.setBounds(10, 46, 61, 14);
+		lblNombre.setBounds(10, 16, 61, 14);
 		add(lblNombre);
 		
+		JLabel lblDeporte = new JLabel("Deporte");
+		lblDeporte.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblDeporte.setBounds(163, 16, 46, 14);
+		add(lblDeporte);
+		
+		JLabel lblMusica = new JLabel("Musica");
+		lblMusica.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMusica.setBounds(264, 16, 46, 14);
+		add(lblMusica);
+		
+		JLabel lblEspectaculo = new JLabel("Espectaculo");
+		lblEspectaculo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblEspectaculo.setBounds(357, 16, 67, 14);
+		add(lblEspectaculo);
+		
+		JLabel lblCiencia = new JLabel("Ciencia");
+		lblCiencia.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCiencia.setBounds(484, 16, 46, 14);
+		add(lblCiencia);
+		
+		//Campos del formulario
 		textNombre = new JTextField();
-		textNombre.setBounds(67, 44, 86, 20);
+		textNombre.setBounds(67, 14, 86, 20);
 		add(textNombre);
 		
 		//Se crean los spinners
 		SpinnerModel modelo = new SpinnerNumberModel(1, 1, 5, 1);  
 		
 		spinnerDeporte = new JSpinner(modelo);
-		spinnerDeporte.setBounds(183, 44, 40, 20);
+		spinnerDeporte.setBounds(214, 14, 40, 20);
 		add(spinnerDeporte);
 		
 		modelo = new SpinnerNumberModel(1, 1, 5, 1); 
 		spinnerMusica = new JSpinner(modelo);
-		spinnerMusica.setBounds(234, 44, 40, 20);
+		spinnerMusica.setBounds(307, 14, 40, 20);
 		add(spinnerMusica);
 		
 		modelo = new SpinnerNumberModel(1, 1, 5, 1); 
 		spinnerEspectaculo = new JSpinner(modelo);
-		spinnerEspectaculo.setBounds(285, 44, 40, 20);
+		spinnerEspectaculo.setBounds(434, 14, 40, 20);
 		add(spinnerEspectaculo);
 		
 		modelo = new SpinnerNumberModel(1, 1, 5, 1); 
 		spinnerCiencia = new JSpinner(modelo);
-		spinnerCiencia.setBounds(336, 44, 40, 20);
+		spinnerCiencia.setBounds(531, 14, 40, 20);
 		add(spinnerCiencia);
 		
-		//Se crean los botones
+		//Botones
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -82,7 +104,7 @@ public class JPanelTomarDatos extends JPanel {
 			}
 		});
 		btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnAgregar.setBounds(424, 43, 89, 23);
+		btnAgregar.setBounds(242, 57, 89, 23);
 		add(btnAgregar);
 		
 		JButton btnProcesar = new JButton("Procesar!");
@@ -134,6 +156,8 @@ public class JPanelTomarDatos extends JPanel {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnNewButton.setBounds(10, 259, 151, 46);
 		add(btnNewButton);
+		
+		
 		
 		
 		
