@@ -10,7 +10,7 @@ import javax.swing.JLayeredPane;
 public class UIMain {
 
 	private JFrame frame;
-	private final JLayeredPane layeredPane = new JLayeredPane();
+	private static final JLayeredPane layeredPane = new JLayeredPane();
 	
 	private static JPanelTomarDatos panelDatos;
 	private static JPanelDatosProcesados panelDatosProcesados;
@@ -68,6 +68,32 @@ public class UIMain {
 		layeredPane.add(panelDatosProcesados);
 		layeredPane.add(panelEstadisticas);
 		
+		
+	}
+	
+	//Este metodo "reinicia" todo por default
+	public static void volverACargarDatos() {
+		panelDatosProcesados.setVisible(false);  //Primero quito el panelDatosProcesados de la vision del usuario
+		
+		//Se vuelve a declarar todos los paneles
+		panelEstadisticas = new JPanelEstadisticas();
+		panelDatosProcesados = new JPanelDatosProcesados();
+		panelDatos = new JPanelTomarDatos(); 
+		
+		//Se actualiza el layeredPane quitando los componentes anteriores y metiendo los nuevos.
+		layeredPane.remove(panelDatos);
+		layeredPane.add(panelDatos);
+		
+		layeredPane.remove(panelDatosProcesados);
+		layeredPane.add(panelDatosProcesados);
+		
+		layeredPane.remove(panelEstadisticas);
+		layeredPane.add(panelEstadisticas);
+		
+		//Se ajusta la visibilidad de los paneles
+		panelDatosProcesados.setVisible(false);
+		panelEstadisticas.setVisible(false);
+		panelDatos.setVisible(true);
 		
 	}
 	

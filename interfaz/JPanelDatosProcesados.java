@@ -93,6 +93,19 @@ public class JPanelDatosProcesados extends JPanel {
 		btnVerEstadisticas.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnVerEstadisticas.setBounds(75, 282, 123, 23);
 		add(btnVerEstadisticas);
+		
+		JButton btnVolverACargarDatos = new JButton("Volver a cargar los datos");
+		btnVolverACargarDatos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				UIMain.volverACargarDatos();
+				
+			}
+		});
+		btnVolverACargarDatos.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnVolverACargarDatos.setBounds(356, 282, 190, 24);
+		add(btnVolverACargarDatos);
 			
 		
 	}
@@ -164,6 +177,4 @@ public class JPanelDatosProcesados extends JPanel {
 	public ArrayList<Integer> getPromediosGrupo2(){
 		return promediosGrupo2;
 	}
-	
-	
 }

@@ -47,7 +47,7 @@ public class BFSTest {
 		Set<Integer> alcanzables = BFS.alcanzables(g, 0);
 		
 		int[] esperado = {0, 1, 2, 3};
-		iguales(esperado, alcanzables);
+		Assert.sonIguales(esperado, alcanzables);
 	}
 	
 	@Test
@@ -59,7 +59,7 @@ public class BFSTest {
 		Set<Integer> alcanzables = BFS.alcanzables(g, 0);
 		
 		int[] esperado = {0, 1, 2, 3, 4};
-		iguales(esperado, alcanzables);
+		Assert.sonIguales(esperado, alcanzables);
 	}
 	
 	private Grafo inicializarEjemplo() 
@@ -71,13 +71,6 @@ public class BFSTest {
 		return g;
 	}
 	
-	public static void iguales(int[] esperado, Set<Integer> alcanzables){
-		assertEquals(esperado.length, alcanzables.size());
-		
-		for (int elem: esperado) {
-			assertTrue(alcanzables.contains(elem));
-		}
-
-	}
+	
 	
 }
