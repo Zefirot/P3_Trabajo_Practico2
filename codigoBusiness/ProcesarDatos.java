@@ -8,12 +8,14 @@ public class ProcesarDatos {
 
 	
 	private Grafo grafo;
+	private ArrayList<Persona> todasLasPersonas;
 	private int indiceGrupo1;
 	private int indiceGrupo2;
 	
 	
 	public ProcesarDatos(ArrayList<Persona> datos) {
 		this.grafo = new Grafo(datos.size());
+		this.todasLasPersonas=datos;
 		this.indiceGrupo1=0;
 		
 		armarGrafo(grafo,datos);
@@ -89,19 +91,38 @@ public class ProcesarDatos {
 		
 	}
 	
-	public Set<Integer> getGrupo1(){
-		return BFS.alcanzables(grafo, indiceGrupo1);
+	public ArrayList<Persona> getGrupo1(){
+		Set<Integer> posiciones = BFS.alcanzables(grafo, indiceGrupo1);
+		
+		return armarGrupo(posiciones);
 	}
-	public Set<Integer> getGrupo2(){ //Si no existe el grupo2 entonces retorno null
+	
+	public ArrayList<Persona> getGrupo2(){ //Si no existe el grupo2 entonces retorno null
 		
 		if(indiceGrupo2!=indiceGrupo1) { //Compara los indice para no devolver el mismo grupo.
-			return BFS.alcanzables(grafo, indiceGrupo2);
+			Set<Integer> posiciones = BFS.alcanzables(grafo, indiceGrupo2);
+			
+			return armarGrupo(posiciones);
 		}
 		return null;
 		
 	}
 	
-	public static ArrayList<Integer> getPromedio(Set<Integer> subGrupo, ArrayList<Persona> grupoCompleto) {
+	
+	private ArrayList<Persona> armarGrupo(Set<Integer> posiciones){
+		ArrayList<Persona> grupo = new ArrayList<Persona>();
+		
+		for(Integer i : posiciones) {
+			
+			grupo.add(todasLasPersonas.get(i));
+			
+		}
+		
+		return grupo;
+		
+	}
+	
+	public static ArrayList<Integer> getPromedio(ArrayList<Persona> subGrupo) {
 		
 		if(subGrupo==null)
 			return null;
@@ -113,15 +134,15 @@ public class ProcesarDatos {
 		int promedioEspectaculo = 0;
 		int promedioCiencia = 0;
 		
-		for(Integer persona : subGrupo) {
+		for(Persona persona : subGrupo) {
 			
-			promedioDeporte += grupoCompleto.get(persona).getDeporte();
+			promedioDeporte += persona.getDeporte();
 			
-			promedioMusica += grupoCompleto.get(persona).getMusica();
+			promedioMusica += persona.getMusica();
 			
-			promedioEspectaculo += grupoCompleto.get(persona).getEspectaculo();
+			promedioEspectaculo += persona.getEspectaculo();
 			
-			promedioCiencia += grupoCompleto.get(persona).getCiencia();
+			promedioCiencia += persona.getCiencia();
 			
 		}
 		

@@ -44,16 +44,6 @@ public class ProcesarDatosTest {
 		
 	}
 	
-	private ArrayList<Persona> obtenerGrupo(Set<Integer> posicionPersonas){
-		ArrayList<Persona> grupo = new ArrayList<Persona>();
-		
-		for(Integer persona: posicionPersonas) {
-			grupo.add(personas.get(persona));
-		}
-		
-		return grupo;
-	}
-	
 	private void prepararDatos() {
 		
 		Persona p1 = new Persona("A",2,3,1,5);
@@ -69,7 +59,17 @@ public class ProcesarDatosTest {
 		personas.add(p4);
 		personas.add(p5);
 	}
-
+	
+	private ArrayList<Persona> obtenerGrupo(Set<Integer> posicionPersonas){
+		ArrayList<Persona> grupo = new ArrayList<Persona>();
+		
+		for(Integer persona: posicionPersonas) {
+			grupo.add(personas.get(persona));
+		}
+		
+		return grupo;
+	}
+	
 	private ArrayList<Persona> grupo1Esperado(){
 		ArrayList<Persona> grupo1 = new ArrayList<Persona>();
 		

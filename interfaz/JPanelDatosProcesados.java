@@ -115,29 +115,27 @@ public class JPanelDatosProcesados extends JPanel {
 		
 		ProcesarDatos datosProcesados = new ProcesarDatos(todasLasPersonas);
 		
-		Set<Integer> grupo1 = datosProcesados.getGrupo1();
-		Set<Integer> grupo2 = datosProcesados.getGrupo2();
+		ArrayList<Persona> grupo1 = datosProcesados.getGrupo1();
+		ArrayList<Persona> grupo2 = datosProcesados.getGrupo2();
 		
 		actualizarTable1(grupo1);
 		actualizarTable2(grupo2);
 		
-		promediosGrupo1 = ProcesarDatos.getPromedio(grupo1, todasLasPersonas);
-		promediosGrupo2 = ProcesarDatos.getPromedio(grupo2, todasLasPersonas);
+		promediosGrupo1 = ProcesarDatos.getPromedio(grupo1);
+		promediosGrupo2 = ProcesarDatos.getPromedio(grupo2);
 		
 	}
 	
-	private void actualizarTable1(Set<Integer> grupo1) {
+	private void actualizarTable1(ArrayList<Persona> grupo1) {
 		
 		
-		for(Integer persona : grupo1) {
-			
-			Persona personaActual=todasLasPersonas.get(persona);
-			
-			String nombre = personaActual.getNombre();
-			String deporte = String.valueOf(personaActual.getDeporte());
-			String musica = String.valueOf(personaActual.getMusica());
-			String espectaculo = String.valueOf(personaActual.getEspectaculo());
-			String ciencia = String.valueOf(personaActual.getCiencia());
+		for(Persona persona : grupo1) {
+		
+			String nombre = persona.getNombre();
+			String deporte = String.valueOf(persona.getDeporte());
+			String musica = String.valueOf(persona.getMusica());
+			String espectaculo = String.valueOf(persona.getEspectaculo());
+			String ciencia = String.valueOf(persona.getCiencia());
 			
 	
 			modelGrupo1.addRow(new String[] { nombre,deporte, musica,espectaculo,ciencia });
@@ -146,21 +144,19 @@ public class JPanelDatosProcesados extends JPanel {
 		
 		
 	}
-	private void actualizarTable2(Set<Integer> grupo2) {
+	private void actualizarTable2(ArrayList<Persona> grupo2) {
 
 		if(grupo2==null) {
 			return;
 		}
 		
-		for(Integer persona : grupo2) {
+		for(Persona persona : grupo2) {
 
-			Persona personaActual=todasLasPersonas.get(persona);
-
-			String nombre = personaActual.getNombre();
-			String deporte = String.valueOf(personaActual.getDeporte());
-			String musica = String.valueOf(personaActual.getMusica());
-			String espectaculo = String.valueOf(personaActual.getEspectaculo());
-			String ciencia = String.valueOf(personaActual.getCiencia());
+			String nombre = persona.getNombre();
+			String deporte = String.valueOf(persona.getDeporte());
+			String musica = String.valueOf(persona.getMusica());
+			String espectaculo = String.valueOf(persona.getEspectaculo());
+			String ciencia = String.valueOf(persona.getCiencia());
 
 
 			modelGrupo2.addRow(new String[] { nombre,deporte, musica,espectaculo,ciencia });
