@@ -10,9 +10,9 @@ public class AGM {
 
 	private Set<Integer> vertices = new HashSet<Integer>(); //Conjunto de donde "marco" los vertices
 	
-	private  ArrayList<Point> aristas = new ArrayList<Point>(); //Conjunto en donde "marco" las aristas
+	private ArrayList<Point> aristas = new ArrayList<Point>(); //Conjunto en donde "marco" las aristas
 	
-	private  Grafo nuevoGrafo;  //Grafo a devolver
+	private Grafo nuevoGrafo;  //Grafo a devolver
 	
 	
 	public Grafo getAGM(Grafo grafo) {

@@ -14,6 +14,28 @@ public class ProcesarDatosTest {
 	private ArrayList<Persona> personas;
 	private ProcesarDatos procesarDatos;
 
+
+	@Test (expected=IllegalArgumentException.class)
+	public void procesarDatosVacios() {
+		
+		this.personas = new ArrayList<Persona>();
+		
+		procesarDatos = new ProcesarDatos(personas);
+		
+	}
+	
+
+	@Test (expected=IllegalArgumentException.class)
+	public void procesarDatosNull() {
+		
+		this.personas = null;
+		
+		procesarDatos = new ProcesarDatos(personas);
+		
+	}
+	
+	
+	
 	@Before
 	public void preparar() {
 		prepararDatos();
@@ -24,9 +46,7 @@ public class ProcesarDatosTest {
 	@Test
 	public void grupo1Test() {
 		
-		Set<Integer> datos = procesarDatos.getGrupo1();
-		
-		ArrayList<Persona> grupo1Actual = obtenerGrupo(datos);
+		ArrayList<Persona> grupo1Actual = procesarDatos.getGrupo1();
 		ArrayList<Persona> grupo1Esperado = grupo1Esperado();
 		
 		Assert.sonIguales(grupo1Esperado, grupo1Actual);
@@ -35,14 +55,14 @@ public class ProcesarDatosTest {
 	@Test
 	public void grupo2Test() {
 		
-		Set<Integer> datos = procesarDatos.getGrupo2();
-		
-		ArrayList<Persona> grupo2Actual = obtenerGrupo(datos);
+		ArrayList<Persona> grupo2Actual = procesarDatos.getGrupo2();
 		ArrayList<Persona> grupo2Esperado = grupo2Esperado();
 		
 		Assert.sonIguales(grupo2Esperado, grupo2Actual);
 		
 	}
+	
+	
 	
 	private void prepararDatos() {
 		
@@ -58,16 +78,6 @@ public class ProcesarDatosTest {
 		personas.add(p3);
 		personas.add(p4);
 		personas.add(p5);
-	}
-	
-	private ArrayList<Persona> obtenerGrupo(Set<Integer> posicionPersonas){
-		ArrayList<Persona> grupo = new ArrayList<Persona>();
-		
-		for(Integer persona: posicionPersonas) {
-			grupo.add(personas.get(persona));
-		}
-		
-		return grupo;
 	}
 	
 	private ArrayList<Persona> grupo1Esperado(){

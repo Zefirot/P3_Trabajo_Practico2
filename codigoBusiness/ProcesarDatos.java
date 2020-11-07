@@ -12,8 +12,10 @@ public class ProcesarDatos {
 	private int indiceGrupo1;
 	private int indiceGrupo2;
 	
-	
 	public ProcesarDatos(ArrayList<Persona> datos) {
+		
+		comprobarDatos(datos);
+		
 		this.grafo = new Grafo(datos.size());
 		this.todasLasPersonas=datos;
 		this.indiceGrupo1=0;
@@ -108,7 +110,6 @@ public class ProcesarDatos {
 		
 	}
 	
-	
 	private ArrayList<Persona> armarGrupo(Set<Integer> posiciones){
 		ArrayList<Persona> grupo = new ArrayList<Persona>();
 		
@@ -121,6 +122,20 @@ public class ProcesarDatos {
 		return grupo;
 		
 	}
+	
+	private void comprobarDatos( ArrayList<Persona> datos ) {
+		
+		if(datos==null) {
+			throw new IllegalArgumentException("Los datos ingresados no pueden ser null");
+		}
+		if(datos.size()==0) {
+			throw new IllegalArgumentException("Los datos ingresados no pueden estar vacios");
+		}
+		
+	}
+	
+	
+	
 	
 	public static ArrayList<Integer> getPromedio(ArrayList<Persona> subGrupo) {
 		
@@ -154,6 +169,9 @@ public class ProcesarDatos {
 		
 		return promedios;
 	}
+	
+	
+	
 	
 	
 	
