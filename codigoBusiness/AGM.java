@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class AGM {
 
-	private Set<Integer> vertices = new HashSet<Integer>(); //Conjunto de donde "marco" los vertices
+	private Set<Integer> vertices = new HashSet<Integer>(); //Conjunto en donde "marco" los vertices
 	
 	private ArrayList<Point> aristas = new ArrayList<Point>(); //Conjunto en donde "marco" las aristas
 	
@@ -33,7 +33,7 @@ public class AGM {
 			
 			vertices.add((int)arista.getY()); //Agrego el vertice que conecta las aristas.
 			
-			aristas.add(new Point((int)arista.getX(),(int)arista.getY()));
+			aristas.add(new Point((int)arista.getX(),(int)arista.getY())); //Agrego la arista agregada al conjunto
 			aristas.add(new Point((int)arista.getY(),(int)arista.getX()));
 			
 			i++;
@@ -51,21 +51,17 @@ public class AGM {
 	}
 	
 	
-	// Se busca la arista con menor peso posible, dentro de los vecinos de los vertices que se van agregando
+	// Se busca la arista con menor peso posible, dentro de los vertices que se van agregando
 	private Point buscarArista(Grafo grafo) {
-		ArrayList<Point> aristasMenores = new ArrayList<Point>();
+		ArrayList<Point> aristasMenores = new ArrayList<Point>();	
 		
-		Iterator<Integer> vertice = vertices.iterator();
-		int verticeActual=0;
-		
-		while(vertice.hasNext()) {
-			verticeActual = vertice.next();
+		for( Integer vertice : vertices) {
 			
-			Set<Integer> vecinos = grafo.vecinos(verticeActual);
+			Set<Integer> vecinos = grafo.vecinos(vertice);
 			
-			Point aristaEncontrada=aristaMenor(verticeActual, vecinos, grafo);
+			Point aristaEncontrada = aristaMenor(vertice, vecinos, grafo);
 			
-			if(aristaEncontrada!=null) { //si la aristaEncontrada es null significa que no existen mas aristas para el vertice pasado.
+			if(aristaEncontrada!=null) {  //si la aristaEncontrada es null significa que no existen mas aristas para ese vertice.
 				aristasMenores.add(aristaEncontrada);
 			}
 			
@@ -80,18 +76,13 @@ public class AGM {
 	private Point aristaMenor(int i,Set<Integer> vecinos, Grafo grafo) {
 		Point arista = null;
 		
-		Iterator<Integer> vecino = vecinos.iterator(); 
-		
-		int pesoMenor = Integer.MAX_VALUE;
-		
-		
-		while(vecino.hasNext()) {
+		int pesoMenor = Integer.MAX_VALUE; //Se intenta buscar al menos una arista que sea menor, asi que para comparar tomo el mayor valor posible.
+
+		for(Integer verticeActual : vecinos) {
 			
-			int verticeActual=vecino.next();
+			int pesoActual = grafo.getPeso(i, verticeActual);
 			
-			int pesoActual = grafo.getPeso(i,verticeActual);
-			
-			/*Las condicines son que la arista no pueda ser (0,0) por ejemplo y que la arista que se encontro no esta agrega
+			/*Las condicines son que la arista no pueda ser (0,0) y que la arista que se encontro no este agrega
 			 * anteriormente, con eso ultimo se consigue que no haya bucles.
 			*/
 			if(i!=verticeActual  &&
@@ -101,9 +92,11 @@ public class AGM {
 				
 				pesoMenor=pesoActual;
 				arista = new Point(i,verticeActual);
+				
 			}
 			
 		}
+		
 		
 		return arista;
 	}
@@ -111,21 +104,22 @@ public class AGM {
 	//Recorre la lista de aristas y calcula cual arista es la de menos peso
 	private Point aristaMenorPosible(ArrayList<Point> aristas, Grafo grafo) {
 		
-		Point aristaActual = aristas.get(0);
+		Point aristaEncontrada = aristas.get(0);
 		
-		int pesoMenor = grafo.getPeso((int) aristaActual.getX(),(int) aristaActual.getY());
+		int pesoMenor = grafo.getPeso((int) aristaEncontrada.getX(),(int) aristaEncontrada.getY()); //Se toma como comparacion la primer arista
 		
-		
-		for(Point arista : aristas) {
+		for(Point aristaActual : aristas) {
 			
-			if(pesoMenor>grafo.getPeso((int)arista.getX(),(int) arista.getY())) {
+			int pesoActual = grafo.getPeso((int)aristaActual.getX(),(int) aristaActual.getY());
+			
+			if(pesoMenor>pesoActual) { //Cuando el peso de la arista 0 sea mayor que el de alguna arista entonces esa arista es menor.
 				
-				aristaActual = arista;
-				pesoMenor = grafo.getPeso((int) arista.getX(),(int) arista.getY());
+				aristaEncontrada = aristaActual;
+				pesoMenor = pesoActual;
 				
 			}
 		}
-		return aristaActual;
+		return aristaEncontrada;
 		
 	}
 	

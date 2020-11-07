@@ -26,10 +26,10 @@ public class AGMTest {
 	}
 	
 	@Test
-	public void agmPesoCorrectoEjemplo1() {
+	public void agmPesoCorrectoEjemploTest1() {
 		grafo = new Grafo(9);
 		
-		//Se unen todas las aristas.
+		//Este ejemplo esta sacado de la presentacion del tp
 		grafo.agregarArista(0, 1, 4); //AB  
 		grafo.agregarArista(0, 2, 8); //AH
 		grafo.agregarArista(1, 2, 12); //BH
@@ -44,7 +44,7 @@ public class AGMTest {
 		grafo.agregarArista(6, 8, 9); //DE
 		grafo.agregarArista(6, 7, 13); //DF
 		grafo.agregarArista(7, 8, 10); //FE
-		
+	 
 		Grafo nuevoGrafo = agm.getAGM(grafo);
 		
 		assertEquals(38,nuevoGrafo.getPesoAristas());
@@ -52,20 +52,19 @@ public class AGMTest {
 	}
 	
 	@Test
-	public void agmPesoCorrectoEjemplo2() {
+	public void agmPesoCorrectoEjemploTest2() {
 		grafo = new Grafo(5);
 		
-		grafo.agregarArista(0, 1, 9); //AB  
-		grafo.agregarArista(0, 2, 9); //AH
-		grafo.agregarArista(0, 3, 9); //BH
-		grafo.agregarArista(0, 4, 5); //BC
-		grafo.agregarArista(1, 2, 0);  //HG
-		grafo.agregarArista(1, 3, 6); //HI
-		grafo.agregarArista(1, 4, 8); //CI
-		grafo.agregarArista(2, 3, 6); //CD
-		grafo.agregarArista(2, 4, 8); //CF
-		grafo.agregarArista(3, 4, 4); //IG
-
+		grafo.agregarArista(0, 1, 9);  
+		grafo.agregarArista(0, 2, 9); 
+		grafo.agregarArista(0, 3, 9); 
+		grafo.agregarArista(0, 4, 5); 
+		grafo.agregarArista(1, 2, 0); 
+		grafo.agregarArista(1, 3, 6); 
+		grafo.agregarArista(1, 4, 8); 
+		grafo.agregarArista(2, 3, 6); 
+		grafo.agregarArista(2, 4, 8); 
+		grafo.agregarArista(3, 4, 4); 
 				
 		Grafo nuevoGrafo = agm.getAGM(grafo);
 		assertEquals(15,nuevoGrafo.getPesoAristas());
@@ -74,7 +73,7 @@ public class AGMTest {
 	
 	
 	@Test
-	public void agmPesoCorrectoEjemplo3() {
+	public void agmPesoCorrectoEjemploTest3() {
 		grafo = new Grafo(7);
 		
 		grafo.agregarArista(0, 1, 5);  
@@ -93,7 +92,7 @@ public class AGMTest {
 	}
 	
 	@Test
-	public void agmPesoCorrectoNodoUniversal() {
+	public void agmPesoCorrectoNodoUniversalTest() {
 		grafo = new Grafo(6);
 		
 		grafo.agregarArista(0, 1, 3);
@@ -113,7 +112,7 @@ public class AGMTest {
 	}
 	
 	@Test
-	public void agmPesoUnicoNodo() {
+	public void agmPesoUnicoNodoTest() { //Cuando solo hay un nodo no existe peso alguno
 		grafo = new Grafo(1);
 		
 		Grafo nuevoGrafo = agm.getAGM(grafo);
