@@ -9,9 +9,9 @@ import java.util.Set;
 
 public class Grafo {
 	
-	private ArrayList<Map<Integer,Integer>> vecinos;
-	private Set<Point> aristas;
-	private int peso;
+	private ArrayList<Map<Integer,Integer>> vecinos;  //Esta es una manera de que se el grafo contenga peso en las aristas
+	private Set<Point> aristas;  //Conjunto de aristas
+	private int peso; //Auxiliar para saber el peso de todas las aristas
 	
 	public Grafo(int n) {
 	
@@ -66,18 +66,21 @@ public class Grafo {
 		return vecinos.get(i).keySet();
 	}
 	
+	//Devuelve el peso de una arista en concreto
 	public int getPeso(int i, int j) {
 		return vecinos.get(i).get(j);
 	}
 	
+	//Devuelve el peso de todas las aristas
 	public int getPesoAristas() {
 		return peso;
 	}
 	
-	public Set<Point> getAristas(){
+	//Retorna el conjunto de aristas completas
+	public Set<Point> getAristas(){																									
 		return aristas;
 	}
-	
+																																																						
 	private void verificarVertice(int i) {
 		if(i<0) 
 			throw new IllegalArgumentException("Un parametro no puede ser negativo: "+i);		

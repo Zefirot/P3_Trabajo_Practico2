@@ -110,6 +110,7 @@ public class JPanelDatosProcesados extends JPanel {
 		
 	}
 	
+	//Esta funcion actuliza todas las tables para mostrar los resultados, tambien guarda los promedios de los grupos
 	public void procesarDatos(ArrayList<Persona> personas) {
 		this.todasLasPersonas=personas;
 		
@@ -127,8 +128,6 @@ public class JPanelDatosProcesados extends JPanel {
 	}
 	
 	private void actualizarTable1(ArrayList<Persona> grupo1) {
-		
-		
 		for(Persona persona : grupo1) {
 		
 			String nombre = persona.getNombre();
@@ -137,16 +136,14 @@ public class JPanelDatosProcesados extends JPanel {
 			String espectaculo = String.valueOf(persona.getEspectaculo());
 			String ciencia = String.valueOf(persona.getCiencia());
 			
-	
 			modelGrupo1.addRow(new String[] { nombre,deporte, musica,espectaculo,ciencia });
 			
 		}
-		
-		
 	}
+	
 	private void actualizarTable2(ArrayList<Persona> grupo2) {
 
-		if(grupo2==null) {
+		if(grupo2==null) {  //Contemplo la posibilidad de que no existe el grupo 2 como tal.
 			return;
 		}
 		
@@ -158,12 +155,9 @@ public class JPanelDatosProcesados extends JPanel {
 			String espectaculo = String.valueOf(persona.getEspectaculo());
 			String ciencia = String.valueOf(persona.getCiencia());
 
-
 			modelGrupo2.addRow(new String[] { nombre,deporte, musica,espectaculo,ciencia });
 
 		}
-
-
 	}
 	
 	public ArrayList<Integer> getPromediosGrupo1(){

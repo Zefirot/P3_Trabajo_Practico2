@@ -124,6 +124,18 @@ public class JPanelTomarDatos extends JPanel {
 		btnProcesar.setBounds(228, 259, 120, 36);
 		add(btnProcesar);
 		
+		
+		JButton btnCargarDatos = new JButton("Cargar Datos Default");
+		btnCargarDatos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cargarDatosDefault();
+			}
+		});
+		btnCargarDatos.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnCargarDatos.setBounds(10, 259, 151, 46);
+		add(btnCargarDatos);
+		
 		//Creo la JTable
 		model = new DefaultTableModel();
 		model.addColumn("Nombre");
@@ -143,27 +155,9 @@ public class JPanelTomarDatos extends JPanel {
 		table.setEnabled(false);
 		table.setModel(model);
 		
-		
-		//CAMBIAR FUNCIONALIDAD DE BOTON
-		//EL BOTON TIENE QUE LLEVAR A ALGUN LADO PARA ELEGIR CUANTAS PERSONAS CARGAR
-		JButton btnNewButton = new JButton("Cargar Datos Default");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				cargarDatosDefault();
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton.setBounds(10, 259, 151, 46);
-		add(btnNewButton);
-		
-		
-		
-		
-		
-		
 	}
 	
+	//Se toma el archivo .json y se carga al programa
 	private void cargarDatosDefault() {
 		PersonasJSON personas = new PersonasJSON();
 		personas = personas.leerJSON("src/datosJSON/Personas.JSON");
@@ -184,7 +178,7 @@ public class JPanelTomarDatos extends JPanel {
 		
 	}
 	
-	
+	//Controla que todo usuario que entre al sistema tenga al menos un nombre
 	private boolean controlarDatos() {
 		
 		if(textNombre.getText().equals("")) {

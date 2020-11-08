@@ -167,8 +167,7 @@ public class JPanelEstadisticas extends JPanel {
 		progressBarCienciaG2.setBounds(78, 186, 146, 14);
 		panelGrupo2.add(progressBarCienciaG2);
 		
-		
-		
+
 		JButton btnVolver = new JButton("Volver ");
 		btnVolver.addMouseListener(new MouseAdapter() {
 			@Override
@@ -181,11 +180,9 @@ public class JPanelEstadisticas extends JPanel {
 		btnVolver.setBounds(246, 263, 89, 23);
 		add(btnVolver);
 		
-		
-		
 	}
 	
-	
+	//Esta funcion actualiza todos los promedios
 	public void setPromediosDeGrupos(ArrayList<Integer> promediosGrupo1, ArrayList<Integer> promediosGrupo2) {
 		
 		//Obtener valores para el grupo 1 y actualizar sus progressBars.
@@ -210,6 +207,7 @@ public class JPanelEstadisticas extends JPanel {
 		
 	}
 	
+	//Actualiza los promedios del grupo 1
 	private void actualizarBarsG1(int promedioDeporte, int promedioMusica, int promedioEspectaculo, int promedioCiencia ) {
 		
 		progressBarDeporteG1.setValue(promedioDeporte);
@@ -226,6 +224,7 @@ public class JPanelEstadisticas extends JPanel {
 		
 	}
 	
+	//Actualiza los promedios del grupo 2
 	private void actualizarBarsG2(int promedioDeporte, int promedioMusica, int promedioEspectaculo, int promedioCiencia ) {
 		
 		progressBarDeporteG2.setValue(promedioDeporte);

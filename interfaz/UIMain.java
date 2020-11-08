@@ -9,7 +9,7 @@ import javax.swing.JLayeredPane;
 
 public class UIMain {
 
-	private JFrame frame;
+	private JFrame frmTrabajoPractico;
 	private static final JLayeredPane layeredPane = new JLayeredPane();
 	
 	private static JPanelTomarDatos panelDatos;
@@ -23,7 +23,7 @@ public class UIMain {
 			public void run() {
 				try {
 					UIMain window = new UIMain();
-					window.frame.setVisible(true);
+					window.frmTrabajoPractico.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,12 +42,13 @@ public class UIMain {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 597, 355);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmTrabajoPractico = new JFrame();
+		frmTrabajoPractico.setTitle("Trabajo Practico 2");
+		frmTrabajoPractico.setBounds(100, 100, 597, 355);
+		frmTrabajoPractico.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTrabajoPractico.getContentPane().setLayout(null);
 		layeredPane.setBounds(0, 0, 581, 316);
-		frame.getContentPane().add(layeredPane);
+		frmTrabajoPractico.getContentPane().add(layeredPane);
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -97,7 +98,7 @@ public class UIMain {
 		
 	}
 	
-	
+	//Se realiza la transicion del panel de datos al panel de datos procesados
 	public static void cambiarADatosProcesados() {
 		
 		panelDatosProcesados.procesarDatos(panelDatos.getDatos());
@@ -107,6 +108,7 @@ public class UIMain {
 		
 	}
 	
+	//Se realiza la transicion del panel de datos procesados hacia el panel en donde se muestran las estadisticas
 	public static void cambiarAEstadisticas() {
 		
 		panelDatosProcesados.setVisible(false);
@@ -116,6 +118,7 @@ public class UIMain {
 		
 	}
 	
+	//Se realiza la transicion del panel de estadisticas al panel de datos procesados
 	public static void volverADatosProcesados() {
 		
 		panelEstadisticas.setVisible(false);

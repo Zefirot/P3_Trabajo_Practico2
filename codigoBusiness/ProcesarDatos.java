@@ -31,6 +31,7 @@ public class ProcesarDatos {
 		
 	}
 	
+	//Arma un grafo todos contra todos
 	private void armarGrafo(Grafo grafo, ArrayList<Persona> datos) {
 		
 		for(int i=0 ; i<datos.size() ; i++) {		
@@ -45,6 +46,7 @@ public class ProcesarDatos {
 		}
 	}
 	
+	//Calcula la similaridad de 2 personas
 	private int calcularSimilaridad(Persona persona1, Persona persona2) {
 		
 		int deporte = Math.abs(persona1.getDeporte()-persona2.getDeporte());
@@ -54,7 +56,6 @@ public class ProcesarDatos {
 
 		return deporte+musica+espectaculo+ciencia;		
 	}
-	
 	
 	private void quitarAristaMayorPeso(Grafo grafo) {
 		
@@ -110,6 +111,7 @@ public class ProcesarDatos {
 		
 	}
 	
+	//Toma el set de posiciones y busca las personas para finalmente retornar un grupo
 	private ArrayList<Persona> armarGrupo(Set<Integer> posiciones){
 		ArrayList<Persona> grupo = new ArrayList<Persona>();
 		
@@ -123,6 +125,7 @@ public class ProcesarDatos {
 		
 	}
 	
+	//Se comprueban que los datos pasados a la clase no son "incorrectos".
 	private void comprobarDatos( ArrayList<Persona> datos ) {
 		
 		if(datos==null) {
@@ -134,9 +137,7 @@ public class ProcesarDatos {
 		
 	}
 	
-	
-	
-	
+	//Esta funcion calcula el promedio del grupo pasado por parametro
 	public static ArrayList<Integer> getPromedio(ArrayList<Persona> subGrupo) {
 		
 		if(subGrupo==null)

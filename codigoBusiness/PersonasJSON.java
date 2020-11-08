@@ -76,29 +76,6 @@ public class PersonasJSON {
 		}
 		
 		return ret;
-	}
-	
-	
-	public static void main(String[] args) {
-		/*Persona p1 = new Persona("A",2,3,1,5);
-		Persona p2 = new Persona("B",5,5,1,1);
-		Persona p3 = new Persona("C",5,5,1,1);
-		Persona p4 = new Persona("D",3,5,4,2);
-		Persona p5 = new Persona("E",3,3,3,3);
-		
-		PersonasJSON personas = new PersonasJSON();
-		personas.agregarPersona(p1);
-		personas.agregarPersona(p2);
-		personas.agregarPersona(p3);
-		personas.agregarPersona(p4);
-		personas.agregarPersona(p5);
-	
-		
-		String jsonPretty = personas.generarJSONPretty();
-		
-		personas.guardarJSON(jsonPretty, "Personas.JSON");*/
-		
-	}
-	
+	}	
 	
 }
