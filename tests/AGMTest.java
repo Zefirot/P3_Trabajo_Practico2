@@ -92,7 +92,7 @@ public class AGMTest {
 	}
 	
 	@Test
-	public void agmPesoCorrectoNodoUniversalTest() {
+	public void agmPesoCorrectoVerticeUniversalTest() {
 		grafo = new Grafo(6);
 		
 		grafo.agregarArista(0, 1, 3);
@@ -112,7 +112,7 @@ public class AGMTest {
 	}
 	
 	@Test
-	public void agmPesoUnicoNodoTest() { //Cuando solo hay un nodo no existe peso alguno
+	public void agmPesoUnicoVerticeTest() { //Cuando solo hay un vertice no existe peso alguno
 		grafo = new Grafo(1);
 		
 		Grafo nuevoGrafo = agm.getAGM(grafo);

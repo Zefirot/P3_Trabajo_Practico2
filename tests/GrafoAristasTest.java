@@ -87,7 +87,7 @@ public class GrafoAristasTest {
 		
 		Point[] aristas = {new Point(0,1),new Point(0,2),new Point(0,3), new Point(0,4), new Point(1,2), new Point(4,3)};
 		
-		comprobarAristas(aristas,grafo.getAristas());
+		Assert.comprobarAristas(aristas,grafo.getAristas());
 		
 	}
 	
@@ -107,19 +107,9 @@ public class GrafoAristasTest {
 		
 		Point[] aristas = {new Point(0,1),new Point(0,3), new Point(0,4), new Point(4,3)};
 		
-		comprobarAristas(aristas,grafo.getAristas());
+		Assert.comprobarAristas(aristas,grafo.getAristas());
 	}
 	
-	public void comprobarAristas(Point[] aristas, Set<Point> aristasGrafo) {
-		assertEquals(aristas.length, aristasGrafo.size());
-		
-		for(Point arista : aristas) {
-			
-			assertTrue(aristasGrafo.contains(arista));
-		
-		}
-		
-	}
 	
 	
 

@@ -32,7 +32,7 @@ private Grafo grafo;
 	@Test(expected = IllegalArgumentException.class)
 	public void vecinosMayoresQueTamano() {
 		
-		grafo.agregarArista(1, 2 , 6);
+		grafo.agregarArista(1, 2 , 7);
 		
 		grafo.vecinos(6);
 		
